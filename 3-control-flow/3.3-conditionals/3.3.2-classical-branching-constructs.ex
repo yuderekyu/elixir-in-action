@@ -5,7 +5,6 @@ def max(a, b) do
   else
     b
   end
-
 end
 
 # unless
