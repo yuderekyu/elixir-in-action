@@ -12,15 +12,15 @@ end
 
 defmodule RangeHelperTC do
   def range(from, to) do
-    get_range(from, to, [])
+    calculate_range(from, to, [])
   end
 
-  defp get_range(from, to, result), where from > to do
+  defp calculate_range(from, to, result) when from > to do
     result
   end
 
-  defp get_range(from, to, result) do
+  defp calculate_range(from, to, result) do
     # start from the last position, build the list "bottom up". damn
-    get_range(from, to - 1, [ to | result])
+    calculate_range(from, to - 1, [ to | result])
   end
 end
