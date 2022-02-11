@@ -31,6 +31,14 @@ Enum.filter(
   &(rem(&1, 2) == 1)
 )
 
+# remove capture operator parentheses?
+# '''
+# elixir provides optional parentheses. you can remove parentheses on all calls with at least one argument
+# in practice, developers prefer to add parentheses to most of their calls.
+# they are skipped main in Elixir's control-flow constructs, such as defmodule, if, case, etc, and in certain DSLs"
+#
+# https://hexdocs.pm/elixir/1.13.3/syntax-reference.html#optional-parentheses
+# '''
 Enum.filter(
   [1, 2, 3],
   &rem(&1, 2) == 1
@@ -49,3 +57,32 @@ Enum.reduce(
 # & signifies the start to create an anonymous function
 # the right hand side is the return value format
 Enum.reduce([1, 2, 3], 0, &+/2) # q: why not &(+/2) ?
+
+# above breaks if list does not exclusively contain numbers
+# below relies on multiclause lambda
+Enum.reduce(
+  [1, 2, , :x, 3, 'test'],
+  0,
+  fn
+    element, sum when is_number(element) ->
+      sum + element
+
+    _, sum -> sum
+  end
+)
+
+# opinion: avoid multi clause lambda in favor of multiple functions
+defmodule NumHelper do
+  def sum_nums(enumerable) do
+    Enum.reduce(enumerable, 0, &add_num/2)
+  end
+
+  # move iteration step into a separate, private function
+  defp add_num(current, result) when is_number(current) do
+    current + result
+  end
+
+  defp add_num(_, result) do
+    result
+  end
+end
