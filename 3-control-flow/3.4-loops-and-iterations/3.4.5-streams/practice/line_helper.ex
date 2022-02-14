@@ -1,3 +1,4 @@
+# my trash attempts lol
 defmodule LineHelper do
 	# take a file path and return a list of numbers, with each number representing the length of the corresponding line from the file
   def lines_lengths!(path) do
@@ -35,14 +36,14 @@ defmodule LineHelper do
 
   # return the contents of the longest line in a file
   def longest_line!(path) do
-	  # read in file
     File.stream!(path)
-    # remove trailing newline character
     |> Stream.map(&String.replace(&1, "\n", ""))
-    # create a list of tuples that contain content and length?
     |> Stream.map(&create_content_length_tuple/1)
-    # create an enumerable that contains the current element and index
     |> Enum.reduce(%{content: "", length: 0}, &get_longest_line/2)
+    # remote function call (defined in another module). stylistically, avoid List and Map, b/c there are built in kernel fns that can do the same things
+    # |> Map.get(:content)
+    # kernel equivalent
+    |> get_in([:content])
   end
 
   defp create_content_length_tuple(element) do
@@ -56,6 +57,8 @@ defmodule LineHelper do
   defp get_longest_line(_, result) do
     result
   end
+
+  # if's are nice when a guard doesn't handle the case well
 end
 
 # LineHelper.lines_lengths!("./line_helper.ex")
