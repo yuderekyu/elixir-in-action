@@ -13,6 +13,14 @@ employees = ["Alice", "bob", "John"]
 employees
   |> Enum.with_index
   |> Enum.each(
-       fn (employee, index) ->
+       fn {employee, index} ->
          IO.puts("#{index + 1}. #{employee}")
        end)
+
+# use stream to execute a single iteration instead
+employees
+  |> Stream.with_index
+  |> Enum.each(
+     fn {employee, index} ->
+       IO.puts("#{index + 1}. #{employee}")
+     end)
