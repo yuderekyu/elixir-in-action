@@ -12,8 +12,7 @@ end
 # collectable is an abstract term for a functional data type that can collect values.
 # some examples include lists, maps, Mapset, and file streams
 multiplication_table =
-for x <- 1..9, y <- 1..9 do
+  for x <- 1..9, y <- 1..9,
     into: %{} do
       {{x, y}, x*y} # {x, y} is the key, x*y is the value
     end
-end
