@@ -14,6 +14,6 @@ end
 multiplication_table =
 for x <- 1..9, y <- 1..9 do
     into: %{} do
-      {{x, y}, x*y} # what?
+      {{x, y}, x*y} # {x, y} is the key, x*y is the value
     end
 end
