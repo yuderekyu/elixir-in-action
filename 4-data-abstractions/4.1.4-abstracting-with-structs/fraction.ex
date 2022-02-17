@@ -19,12 +19,13 @@ defmodule Fraction do
   end
 end
 
-one_half = Fraction.new(1,2)
+# one_half = Fraction.new(1,2)
 
 # pattern match
-%Fraction{a: a1, b: b2} = one_half
+# %Fraction{a: a1, b: b2} = one_half
 
 # a struct is a special kind of map.
 # a map can pattern match to a struct, but not the other way around.
-%Fraction{} = %{a: 1, b: 2} # error
-%{a: a, b: b} = Fraction{a: 1, b: 2} # matches
+
+# %Fraction{} = %{a: 1, b: 2} # error
+# %{a: a, b: b} = %Fraction{a: 1, b: 2} # matches
